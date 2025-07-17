@@ -2,67 +2,81 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>32题三视频主观评分</title>
-  <link rel="stylesheet" href="style.css">
+  <title>两音频主观偏好评分</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    #cover-page {
+      text-align: center;
+      padding: 2em;
+    }
+    #questionnaire {
+      display: none;
+    }
+    .audio-pair {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+    }
+    .audio-block {
+      flex: 1;
+      margin: 0 1em;
+      text-align: center;
+    }
+    .choice {
+      text-align: center;
+      margin-top: 1em;
+    }
+    .choice label {
+      margin: 0 1em;
+      font-size: 1.2em;
+    }
+    #complete {
+      display: none;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-
   <!-- Cover Page -->
   <div id="cover-page">
-    <h1>三视频主观评分问卷</h1>
-    <p>欢迎参加我们的问卷调查，请根据以下视频内容，进行评分。</p>
-    <p>本问卷旨在评估视频质量，包含音频质量、空间一致性、语义一致性、时间一致性等多个方面。</p>
+    <h1>两音频主观偏好评分</h1>
+    <p>请听下面两段音频，并选择您认为更好的一个。</p>
     <button id="startButton">开始问卷</button>
   </div>
 
-  <!-- Main Questionnaire -->
-  <div id="questionnaire" style="display:none;">
-    <h1>三视频主观评分问卷</h1>
-    <div id="question-counter"></div>
+  <!-- Questionnaire -->
+  <div id="questionnaire">
+    <h2 id="question-counter"></h2>
 
-    <form id="rating-form">
-
-      <div class="video-rating-pair">
-        <video id="video0" width="320" controls></video>
-        <div class="video-rating-block">
-          <h3>视频 1</h3>
-          <div class="question">音频质量：<span class="radio-group" id="audioQuality0"></span></div>
-          <div class="question">空间一致性：<span class="radio-group" id="spatialConsistency0"></span></div>
-          <div class="question">语义一致性：<span class="radio-group" id="semanticConsistency0"></span></div>
-          <div class="question">时间一致性：<span class="radio-group" id="temporalConsistency0"></span></div>
-          <div class="question">用户偏好：<span class="radio-group" id="userPreference0"></span></div>
-        </div>
+    <div class="audio-pair">
+      <div class="audio-block">
+        <h3>左边音频</h3>
+        <audio id="audioLeft" controls></audio>
       </div>
-
-      <div class="video-rating-pair">
-        <video id="video1" width="320" controls></video>
-        <div class="video-rating-block">
-          <h3>视频 2</h3>
-          <div class="question">音频质量：<span class="radio-group" id="audioQuality1"></span></div>
-          <div class="question">空间一致性：<span class="radio-group" id="spatialConsistency1"></span></div>
-          <div class="question">语义一致性：<span class="radio-group" id="semanticConsistency1"></span></div>
-          <div class="question">时间一致性：<span class="radio-group" id="temporalConsistency1"></span></div>
-          <div class="question">用户偏好：<span class="radio-group" id="userPreference1"></span></div>
-        </div>
+      <div class="audio-block">
+        <h3>右边音频</h3>
+        <audio id="audioRight" controls></audio>
       </div>
+    </div>
 
-      <div class="video-rating-pair">
-        <video id="video2" width="320" controls></video>
-        <div class="video-rating-block">
-          <h3>视频 3</h3>
-          <div class="question">音频质量：<span class="radio-group" id="audioQuality2"></span></div>
-          <div class="question">空间一致性：<span class="radio-group" id="spatialConsistency2"></span></div>
-          <div class="question">语义一致性：<span class="radio-group" id="semanticConsistency2"></span></div>
-          <div class="question">时间一致性：<span class="radio-group" id="temporalConsistency2"></span></div>
-          <div class="question">用户偏好：<span class="radio-group" id="userPreference2"></span></div>
-        </div>
-      </div>
-
+    <form id="rating-form" class="choice">
+      <label>
+        <input type="radio" name="preference" value="left" required> 左边更好
+      </label>
+      <label>
+        <input type="radio" name="preference" value="right" required> 右边更好
+      </label>
+      <br><br>
       <button type="submit">下一题</button>
     </form>
 
-    <div id="complete" style="display:none;">
-      <p>评分完成！点击下载：</p>
+    <div id="complete">
+      <p>评分完成！点击下载结果：</p>
       <button onclick="downloadCSV()">下载 CSV</button>
     </div>
   </div>
