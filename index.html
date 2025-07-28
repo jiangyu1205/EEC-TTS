@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
   <meta charset="UTF-8" />
   <title>主观音频评估任务</title>
@@ -58,6 +59,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- ✅ 封面页 -->
@@ -144,15 +146,16 @@
   </div>
 
   <!-- 年龄分类任务 -->
+  <!-- 年龄分类任务 -->
   <div id="age-task">
     <h2 id="age-counter"></h2>
-      <div class="audio-single">
-        <div class="audio-block">
-          <h3>请结合音频和图像，判断说话者年龄</h3>
-          <audio id="ageAudio" controls></audio>
-          <br />
-          <img id="ageImage" src="" alt="对应图像" style="max-width: 300px; margin-top: 1em;" />
-        </div>
+    <div class="audio-single">
+      <div class="audio-block">
+        <h3>请结合音频与图像判断年龄</h3>
+        <audio id="ageAudio" controls></audio>
+        <br />
+        <img id="ageImage" src="" alt="年龄提示图"
+          style="margin-top: 1em; max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px;" />
       </div>
     </div>
 
@@ -176,4 +179,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

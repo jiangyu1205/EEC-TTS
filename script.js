@@ -129,75 +129,75 @@ window.onload = () => {
   });
 };
 
-  // A-B 任务提交
-  document.getElementById('rating-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const emotion = formData.get('emotion_similarity');
-    const quality = formData.get('audio_quality');
+// A-B 任务提交
+document.getElementById('rating-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const emotion = formData.get('emotion_similarity');
+  const quality = formData.get('audio_quality');
 
-    results.push({
-      question: current + 1,
-      audioA: tripleGroups[current][0],
-      audioB: tripleGroups[current][1],
-      audioC: tripleGroups[current][2],
-      emotionSimilarity: emotion,
-      audioQuality: quality,
-      timestamp: new Date().toISOString(),
-    });
-
-    current++;
-    if (current < tripleGroups.length) {
-      loadQuestion(current);
-    } else {
-      document.getElementById('rating-form').style.display = 'none';
-      document.getElementById('complete').style.display = 'block';
-    }
+  results.push({
+    question: current + 1,
+    audioA: tripleGroups[current][0],
+    audioB: tripleGroups[current][1],
+    audioC: tripleGroups[current][2],
+    emotionSimilarity: emotion,
+    audioQuality: quality,
+    timestamp: new Date().toISOString(),
   });
 
-  // 情感任务提交
-  document.getElementById('emotion-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const label = formData.get('emotion_label');
+  current++;
+  if (current < tripleGroups.length) {
+    loadQuestion(current);
+  } else {
+    document.getElementById('rating-form').style.display = 'none';
+    document.getElementById('complete').style.display = 'block';
+  }
+});
 
-    emotionResults.push({
-      question: current + 1,
-      audio: emotionAudios[current],
-      label: label,
-      timestamp: new Date().toISOString(),
-    });
+// 情感任务提交
+document.getElementById('emotion-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const label = formData.get('emotion_label');
 
-    current++;
-    if (current < emotionAudios.length) {
-      loadEmotionQuestion(current);
-    } else {
-      document.getElementById('emotion-form').style.display = 'none';
-      document.getElementById('complete-emotion').style.display = 'block';
-    }
+  emotionResults.push({
+    question: current + 1,
+    audio: emotionAudios[current],
+    label: label,
+    timestamp: new Date().toISOString(),
   });
 
-  // 年龄任务提交
-  document.getElementById('age-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const label = formData.get('age_label');
+  current++;
+  if (current < emotionAudios.length) {
+    loadEmotionQuestion(current);
+  } else {
+    document.getElementById('emotion-form').style.display = 'none';
+    document.getElementById('complete-emotion').style.display = 'block';
+  }
+});
 
-    ageResults.push({
-      question: current + 1,
-      audio: ageAudios[current],
-      label: label,
-      timestamp: new Date().toISOString(),
-    });
+// 年龄任务提交
+document.getElementById('age-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const label = formData.get('age_label');
 
-    current++;
-    if (current < ageAudios.length) {
-      loadAgeQuestion(current);
-    } else {
-      document.getElementById('age-form').style.display = 'none';
-      document.getElementById('complete-age').style.display = 'block';
-    }
+  ageResults.push({
+    question: current + 1,
+    audio: ageAudios[current],
+    label: label,
+    timestamp: new Date().toISOString(),
   });
+
+  current++;
+  if (current < ageAudios.length) {
+    loadAgeQuestion(current);
+  } else {
+    document.getElementById('age-form').style.display = 'none';
+    document.getElementById('complete-age').style.display = 'block';
+  }
+});
 
 
 // 下载 A-B 任务结果
@@ -268,7 +268,11 @@ function loadEmotionQuestion(index) {
 // ====== 加载年龄分类题目 ======
 function loadAgeQuestion(index) {
   document.getElementById("age-counter").textContent = `题目 ${index + 1} / ${ageAudios.length}`;
-  document.getElementById("ageAudio").src = ageAudios[index];
-  document.getElementById("ageImage").src = ageImages[index];
+  const audioPath = ageAudios[index];
+  document.getElementById("ageAudio").src = audioPath;
+
+  const imagePath = audioPath.replace('age_audio/', 'age_images/').replace('.wav', '.jpg');
+  document.getElementById("ageImage").src = imagePath;
+
   document.getElementById("age-form").reset();
 }
