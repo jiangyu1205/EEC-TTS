@@ -53,7 +53,7 @@
     <h1>三音频主观评估任务</h1>
     <p>在每一题中，请比较 A、B 两个音频与参考音频 C，选择：</p>
     <ul style="text-align:left; display:inline-block;">
-      <li>哪个更像 C 的情感？</li>
+      <li>哪个更像 C 的音色？</li>
       <li>哪个音质更好？</li>
     </ul>
     <button id="startButton">开始任务</button>
@@ -80,15 +80,17 @@
 
     <form id="rating-form">
       <div class="choice">
-        <p><strong>哪个音频（A或B）的情感更像 C？</strong></p>
+        <p><strong>哪个音频（A或B）的音色更像 C？</strong></p>
         <label><input type="radio" name="emotion_similarity" value="A" required> A</label>
         <label><input type="radio" name="emotion_similarity" value="B" required> B</label>
+        <label><input type="radio" name="emotion_similarity" value="equal" required> 相同</label>
       </div>
 
       <div class="choice">
         <p><strong>哪个音频（A或B）的音质更好？</strong></p>
         <label><input type="radio" name="audio_quality" value="A" required> A</label>
         <label><input type="radio" name="audio_quality" value="B" required> B</label>
+        <label><input type="radio" name="audio_quality" value="equal" required> 相同</label>
       </div>
 
       <button type="submit">下一题</button>
