@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>三音频主观评估</title>
+  <meta charset="UTF-8" />
+  <title>主观音频评估任务</title>
   <style>
     body {
       font-family: sans-serif;
@@ -11,7 +11,13 @@
       padding: 2em;
     }
 
-    #cover-page, #questionnaire, #emotion-task, #complete, #complete-emotion {
+    #cover-page,
+    #questionnaire,
+    #emotion-task,
+    #age-task,
+    #complete,
+    #complete-emotion,
+    #complete-age {
       text-align: center;
     }
 
@@ -19,7 +25,8 @@
       padding: 4em 2em;
     }
 
-    .audio-triple, .audio-single {
+    .audio-triple,
+    .audio-single {
       display: flex;
       justify-content: space-around;
       margin-bottom: 1em;
@@ -41,7 +48,12 @@
       font-size: 1.1em;
     }
 
-    #questionnaire, #emotion-task, #complete, #complete-emotion {
+    #questionnaire,
+    #emotion-task,
+    #age-task,
+    #complete,
+    #complete-emotion,
+    #complete-age {
       display: none;
     }
   </style>
@@ -52,8 +64,10 @@
   <div id="cover-page">
     <h1>主观音频评估任务</h1>
     <p>请选择任务：</p>
-    <button id="startAB">开始 A-B 音频对比任务</button>
-    <button id="startEmotion">开始情感分类任务</button>
+    <button id="startAB">A-B 音频对比</button>
+    <button id="startEmotion">情感分类</button>
+    <button id="startAge">年龄分类</button>
+
   </div>
 
   <!-- ✅ AB对比任务 -->
@@ -113,11 +127,11 @@
     <form id="emotion-form">
       <div class="choice">
         <p><strong>该音频表达的情感是？</strong></p>
-        <label><input type="radio" name="emotion_label" value="HAPPY" required> ANGRY</label>
-        <label><input type="radio" name="emotion_label" value="ANGRY" required> HAPPY</label>
-        <label><input type="radio" name="emotion_label" value="SAD" required> SAD</label>
-        <label><input type="radio" name="emotion_label" value="NEUTRAL" required> SURPRISED</label>
-        <label><input type="radio" name="emotion_label" value="SURPRISED" required> NEUTRAL</label>
+        <label><input type="radio" name="emotion_label" value="HAPPY" required> ANGRY愤怒</label>
+        <label><input type="radio" name="emotion_label" value="ANGRY" required> HAPPY开心</label>
+        <label><input type="radio" name="emotion_label" value="SAD" required> SAD难过</label>
+        <label><input type="radio" name="emotion_label" value="NEUTRAL平淡" required> SURPRISED</label>
+        <label><input type="radio" name="emotion_label" value="SURPRISED惊讶" required> NEUTRAL</label>
       </div>
 
       <button type="submit">下一题</button>
@@ -126,6 +140,34 @@
     <div id="complete-emotion">
       <p>情感分类完成！点击下载结果：</p>
       <button onclick="downloadEmotionCSV()">下载 情感任务 CSV</button>
+    </div>
+  </div>
+
+  <!-- 年龄分类任务 -->
+  <div id="age-task">
+    <h2 id="age-counter"></h2>
+    <div class="audio-single">
+      <div class="audio-block">
+        <h3>请听音频并选择其年龄段</h3>
+        <audio id="ageAudio" controls></audio>
+      </div>
+    </div>
+
+    <form id="age-form">
+      <div class="choice">
+        <p><strong>该音频说话者的年龄段是？</strong></p>
+        <label><input type="radio" name="age_label" value="child" required /> 儿童 (0-12)</label>
+        <label><input type="radio" name="age_label" value="teen" required /> 青少年 (13-19)</label>
+        <label><input type="radio" name="age_label" value="adult" required /> 成年人 (20-59)</label>
+        <label><input type="radio" name="age_label" value="senior" required /> 老年人 (60+)</label>
+      </div>
+
+      <button type="submit">下一题</button>
+    </form>
+
+    <div id="complete-age">
+      <p>年龄分类完成！点击下载结果：</p>
+      <button onclick="downloadAgeCSV()">下载 年龄任务 CSV</button>
     </div>
   </div>
 
