@@ -32,6 +32,13 @@ const ageAudios = [
   'age_audio/audio4.wav',
   'age_audio/audio5.wav'
 ];
+const ageImages = [
+  'age_audio/image1.jpg',
+  'age_audio/image2.jpg',
+  'age_audio/image3.jpg',
+  'age_audio/image4.jpg',
+  'age_audio/image5.jpg'
+];
 
 // ====== 全局状态变量 ======
 let current = 0;
@@ -262,5 +269,6 @@ function loadEmotionQuestion(index) {
 function loadAgeQuestion(index) {
   document.getElementById("age-counter").textContent = `题目 ${index + 1} / ${ageAudios.length}`;
   document.getElementById("ageAudio").src = ageAudios[index];
+  document.getElementById("ageImage").src = ageImages[index];
   document.getElementById("age-form").reset();
 }
