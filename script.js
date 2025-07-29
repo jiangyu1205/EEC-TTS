@@ -283,7 +283,6 @@ function loadAgeQuestion(index) {
   const audioPath = ageAudios[index];
   document.getElementById("ageAudio").src = audioPath;
 
-  // const imagePath = audioPath.replace('age_audio/', 'age_images/').replace('.wav', '.jpg');
   document.getElementById("ageImage").src = ageImages[index];
 
   document.getElementById("age-form").reset();
