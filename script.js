@@ -39,7 +39,7 @@ const ageAudios = [
 ];
 
 const ageImages = [
-  'age_audio/0124_01.jpg',
+  'age_audio/0176_01.jpg',
   'age_audio/0043_01.jpg',
   'age_audio/0652_01.jpg',
   'age_audio/0574_01.jpg',
