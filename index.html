@@ -161,12 +161,13 @@
 
     <form id="age-form">
       <div class="choice">
-        <p><strong>该音频说话者的年龄段是？</strong></p>
-        <label><input type="radio" name="age_label" value="child" required /> 儿童 (0-12)</label>
-        <label><input type="radio" name="age_label" value="teen" required /> 青少年 (13-19)</label>
-        <label><input type="radio" name="age_label" value="adult" required /> 成年人 (20-59)</label>
-        <label><input type="radio" name="age_label" value="senior" required /> 老年人 (60+)</label>
+        <p><strong>请输入你预测的年龄（只能是数字）：</strong></p>
+        <input type="text" id="age_input" name="age_label" required pattern="^\d+$" 
+               placeholder="例如：35" title="请输入整数年龄，例如 28" />
       </div>
+      
+
+
 
       <button type="submit">下一题</button>
     </form>

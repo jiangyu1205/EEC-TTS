@@ -192,13 +192,19 @@ document.getElementById('emotion-form').addEventListener('submit', (e) => {
 // 年龄任务提交
 document.getElementById('age-form').addEventListener('submit', (e) => {
   e.preventDefault();
-  const formData = new FormData(e.target);
-  const label = formData.get('age_label');
+
+  const input = document.getElementById('age_input');
+  const value = input.value.trim();
+
+  if (!/^\d+$/.test(value)) {
+    alert("请输入有效的整数年龄");
+    return;
+  }
 
   ageResults.push({
     question: current + 1,
     audio: ageAudios[current],
-    label: label,
+    label: value,
     timestamp: new Date().toISOString(),
   });
 
@@ -282,7 +288,6 @@ function loadAgeQuestion(index) {
   document.getElementById("age-counter").textContent = `题目 ${index + 1} / ${ageAudios.length}`;
   const audioPath = ageAudios[index];
   document.getElementById("ageAudio").src = audioPath;
-
   document.getElementById("ageImage").src = ageImages[index];
 
   document.getElementById("age-form").reset();
