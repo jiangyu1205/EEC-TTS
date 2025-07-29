@@ -26,19 +26,31 @@ const emotionAudios = [
   'emotion_audio/0019_000399.wav'
 ];
 const ageAudios = [
-  'age_audio/audio1.wav',
-  'age_audio/audio2.wav',
-  'age_audio/audio3.wav',
-  'age_audio/audio4.wav',
-  'age_audio/audio5.wav'
+  'age_audio/00025.wav',
+  'age_audio/00057.wav',
+  'age_audio/00093.wav',
+  'age_audio/00120.wav',
+  'age_audio/00044.wav',
+  'age_audio/00029.wav',
+  'age_audio/00268.wav',
+  'age_audio/00186.wav',
+  'age_audio/00208.wav',
+  'age_audio/00445.wav'
 ];
+
 const ageImages = [
-  'age_audio/image1.jpg',
-  'age_audio/image2.jpg',
-  'age_audio/image3.jpg',
-  'age_audio/image4.jpg',
-  'age_audio/image5.jpg'
+  'age_audio/0124_01.jpg',
+  'age_audio/0043_01.jpg',
+  'age_audio/0652_01.jpg',
+  'age_audio/0574_01.jpg',
+  'age_audio/0332_01.jpg',
+  'age_audio/0096_01.jpg',
+  'age_audio/0202_01.jpg',
+  'age_audio/0178_01.jpg',
+  'age_audio/0175_01.jpg',
+  'age_audio/0129_01.jpg'
 ];
+
 
 // ====== 全局状态变量 ======
 let current = 0;
