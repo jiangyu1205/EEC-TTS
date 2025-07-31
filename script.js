@@ -248,7 +248,7 @@ function downloadABAnswer() {
 
 // 下载已有的 Emotion 答案
 function downloadEmotionAnswer() {
-  downloadFile('answers/emotion.txt', 'label.txt');
+  downloadFile('answers/emotion.txt', 'emotion.txt');
 }
 
 // 下载已有的 Age 答案
