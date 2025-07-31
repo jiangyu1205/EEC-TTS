@@ -1,4 +1,4 @@
-// ====== 三元组任务数据 ======
+// ====== Triplet Task Data ======
 const tripleGroups = [
   ['gt_audio/speaker1_gen_ref.wav', 'gt_audio/speaker1_gen_raw.wav', 'gt_audio/speaker1_gt.wav'],
   ['gt_audio/speaker2_gen_raw.wav', 'gt_audio/speaker2_gen_ref.wav', 'gt_audio/speaker2_gt.wav'],
@@ -12,7 +12,7 @@ const tripleGroups = [
   ['gt_audio/speaker10_gen_ref.wav', 'gt_audio/speaker10_gen_raw.wav', 'gt_audio/speaker10_gt.wav']
 ];
 
-// ====== 情感分类任务数据 ======
+// ====== Emotion Classification Task Data ======
 const emotionAudios = [
   'emotion_audio/0003_000371_seed15_0.wav',
   'emotion_audio/0003_000379_seed38_0.wav',
@@ -25,6 +25,8 @@ const emotionAudios = [
   'emotion_audio/0019_001072.wav',
   'emotion_audio/0019_000399.wav'
 ];
+
+// ====== Age Classification Task Data ======
 const ageAudios = [
   'age_audio/00025.wav',
   'age_audio/00057.wav',
@@ -51,157 +53,139 @@ const ageImages = [
   'age_audio/0129_01.jpg'
 ];
 
-
-// ====== 全局状态变量 ======
+// ====== Global State Variables ======
 let current = 0;
 let results = [];
 let emotionResults = [];
 let ageResults = [];
 
-// ====== 页面加载时绑定事件 ======
+// ====== Event Binding on Page Load ======
 window.onload = () => {
   document.getElementById("startAB").addEventListener("click", () => {
-    document.getElementById("cover-page").style.display = "none";
-    document.getElementById("questionnaire").style.display = "block";
-    document.getElementById("emotion-task").style.display = "none";
-    document.getElementById("age-task").style.display = "none";
-
+    showTask("questionnaire");
     current = 0;
     results = [];
     loadQuestion(current);
   });
 
   document.getElementById("startEmotion").addEventListener("click", () => {
-    document.getElementById("cover-page").style.display = "none";
-    document.getElementById("questionnaire").style.display = "none";
-    document.getElementById("emotion-task").style.display = "block";
-    document.getElementById("age-task").style.display = "none";
-
+    showTask("emotion-task");
     current = 0;
     emotionResults = [];
     loadEmotionQuestion(current);
   });
 
-  // **添加年龄任务按钮绑定**
   document.getElementById("startAge").addEventListener("click", () => {
-    document.getElementById("cover-page").style.display = "none";
-    document.getElementById("questionnaire").style.display = "none";
-    document.getElementById("emotion-task").style.display = "none";
-    document.getElementById("age-task").style.display = "block";
-
+    showTask("age-task");
     current = 0;
     ageResults = [];
     loadAgeQuestion(current);
   });
 
-  // A-B 任务提交
-document.getElementById('rating-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const emotion = formData.get('emotion_similarity');
-  const quality = formData.get('audio_quality');
+  // A-B Task Submission
+  document.getElementById('rating-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const emotion = formData.get('emotion_similarity');
+    const quality = formData.get('audio_quality');
 
-  results.push({
-    question: current + 1,
-    audioA: tripleGroups[current][0],
-    audioB: tripleGroups[current][1],
-    audioC: tripleGroups[current][2],
-    emotionSimilarity: emotion,
-    audioQuality: quality,
-    timestamp: new Date().toISOString(),
+    results.push({
+      question: current + 1,
+      audioA: tripleGroups[current][0],
+      audioB: tripleGroups[current][1],
+      audioC: tripleGroups[current][2],
+      emotionSimilarity: emotion,
+      audioQuality: quality,
+      timestamp: new Date().toISOString(),
+    });
+
+    current++;
+    if (current < tripleGroups.length) {
+      loadQuestion(current);
+    } else {
+      document.getElementById('rating-form').style.display = 'none';
+      document.getElementById('complete').style.display = 'block';
+    }
   });
 
-  current++;
-  if (current < tripleGroups.length) {
-    loadQuestion(current);
-  } else {
-    document.getElementById('rating-form').style.display = 'none';
-    document.getElementById('complete').style.display = 'block';
-  }
-});
+  // Emotion Task Submission
+  document.getElementById('emotion-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const label = formData.get('emotion_label');
 
-// 情感任务提交
-document.getElementById('emotion-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const label = formData.get('emotion_label');
+    emotionResults.push({
+      question: current + 1,
+      audio: emotionAudios[current],
+      label: label,
+      timestamp: new Date().toISOString(),
+    });
 
-  emotionResults.push({
-    question: current + 1,
-    audio: emotionAudios[current],
-    label: label,
-    timestamp: new Date().toISOString(),
+    current++;
+    if (current < emotionAudios.length) {
+      loadEmotionQuestion(current);
+    } else {
+      document.getElementById('emotion-form').style.display = 'none';
+      document.getElementById('complete-emotion').style.display = 'block';
+    }
   });
 
-  current++;
-  if (current < emotionAudios.length) {
-    loadEmotionQuestion(current);
-  } else {
-    document.getElementById('emotion-form').style.display = 'none';
-    document.getElementById('complete-emotion').style.display = 'block';
-  }
-});
+  // Age Task Submission
+  document.getElementById('age-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('age_input');
+    const value = input.value.trim();
 
-// 年龄任务提交
-document.getElementById('age-form').addEventListener('submit', (e) => {
-  e.preventDefault();
+    if (!/^\d+$/.test(value)) {
+      alert("Please enter a valid integer age.");
+      return;
+    }
 
-  const input = document.getElementById('age_input');
-  const value = input.value.trim();
+    ageResults.push({
+      question: current + 1,
+      audio: ageAudios[current],
+      label: value,
+      timestamp: new Date().toISOString(),
+    });
 
-  if (!/^\d+$/.test(value)) {
-    alert("请输入有效的整数年龄");
-    return;
-  }
-
-  ageResults.push({
-    question: current + 1,
-    audio: ageAudios[current],
-    label: value,
-    timestamp: new Date().toISOString(),
+    current++;
+    if (current < ageAudios.length) {
+      loadAgeQuestion(current);
+    } else {
+      document.getElementById('age-form').style.display = 'none';
+      document.getElementById('complete-age').style.display = 'block';
+    }
   });
-
-  current++;
-  if (current < ageAudios.length) {
-    loadAgeQuestion(current);
-  } else {
-    document.getElementById('age-form').style.display = 'none';
-    document.getElementById('complete-age').style.display = 'block';
-  }
-});
 };
 
-
-
-
-// 下载 A-B 任务结果
+// ====== Download A-B Task Result ======
 function downloadCSV() {
-  if (results.length === 0) return alert('无 A-B 任务结果可下载。');
+  if (results.length === 0) return alert('No A-B results to download.');
   const header = Object.keys(results[0]).join(',');
   const lines = results.map((r) => Object.values(r).join(','));
   const csv = [header, ...lines].join('\n');
   downloadBlob(csv, 'triple_audio_results.csv');
 }
 
-// 下载情感任务结果
+// ====== Download Emotion Task Result ======
 function downloadEmotionCSV() {
-  if (emotionResults.length === 0) return alert('无情感任务结果可下载。');
+  if (emotionResults.length === 0) return alert('No emotion results to download.');
   const header = Object.keys(emotionResults[0]).join(',');
   const lines = emotionResults.map((r) => Object.values(r).join(','));
   const csv = [header, ...lines].join('\n');
   downloadBlob(csv, 'emotion_label_results.csv');
 }
 
-// 下载年龄任务结果
+// ====== Download Age Task Result ======
 function downloadAgeCSV() {
-  if (ageResults.length === 0) return alert('无年龄任务结果可下载。');
+  if (ageResults.length === 0) return alert('No age results to download.');
   const header = Object.keys(ageResults[0]).join(',');
   const lines = ageResults.map((r) => Object.values(r).join(','));
   const csv = [header, ...lines].join('\n');
   downloadBlob(csv, 'age_label_results.csv');
 }
 
-// 通用下载函数
+// ====== General CSV Downloader ======
 function downloadBlob(content, filename) {
   const blob = new Blob([content], { type: 'text/csv' });
   const a = document.createElement('a');
@@ -209,22 +193,22 @@ function downloadBlob(content, filename) {
   a.download = filename;
   a.click();
 }
-// ====== 显示指定任务，隐藏其它 ======
+
+// ====== Show Selected Task, Hide Others ======
 function showTask(taskId) {
   document.getElementById('cover-page').style.display = 'none';
   const tasks = ['questionnaire', 'emotion-task', 'age-task', 'complete', 'complete-emotion', 'complete-age'];
   tasks.forEach(id => {
     document.getElementById(id).style.display = (id === taskId) ? 'block' : 'none';
   });
-  // 还要确保所有表单显示（防止显示隐藏冲突）
   ['rating-form', 'emotion-form', 'age-form'].forEach(formId => {
     document.getElementById(formId).style.display = 'block';
   });
 }
 
-// ====== 加载三元组任务题目 ======
+// ====== Load Triplet Task Question ======
 function loadQuestion(index) {
-  document.getElementById("question-counter").textContent = `题目 ${index + 1} / ${tripleGroups.length}`;
+  document.getElementById("question-counter").textContent = `Question ${index + 1} / ${tripleGroups.length}`;
   const [aSrc, bSrc, cSrc] = tripleGroups[index];
   document.getElementById("audioA").src = aSrc;
   document.getElementById("audioB").src = bSrc;
@@ -232,19 +216,42 @@ function loadQuestion(index) {
   document.getElementById("rating-form").reset();
 }
 
-// ====== 加载情感分类题目 ======
+// ====== Load Emotion Task Question ======
 function loadEmotionQuestion(index) {
-  document.getElementById("emotion-counter").textContent = `题目 ${index + 1} / ${emotionAudios.length}`;
+  document.getElementById("emotion-counter").textContent = `Question ${index + 1} / ${emotionAudios.length}`;
   document.getElementById("emotionAudio").src = emotionAudios[index];
   document.getElementById("emotion-form").reset();
 }
 
-// ====== 加载年龄分类题目 ======
+// ====== Load Age Task Question ======
 function loadAgeQuestion(index) {
-  document.getElementById("age-counter").textContent = `题目 ${index + 1} / ${ageAudios.length}`;
+  document.getElementById("age-counter").textContent = `Question ${index + 1} / ${ageAudios.length}`;
   const audioPath = ageAudios[index];
   document.getElementById("ageAudio").src = audioPath;
   document.getElementById("ageImage").src = ageImages[index];
-
   document.getElementById("age-form").reset();
+}
+
+function downloadFile(filePath, fileName) {
+  const link = document.createElement('a');
+  link.href = filePath;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// 下载已有的 AB 答案
+function downloadABAnswer() {
+  downloadFile('answers/ab.txt', 'ab.txt');
+}
+
+// 下载已有的 Emotion 答案
+function downloadEmotionAnswer() {
+  downloadFile('answers/emotion.txt', 'label.txt');
+}
+
+// 下载已有的 Age 答案
+function downloadAgeAnswer() {
+  downloadFile('answers/age.txt', 'age.txt');
 }

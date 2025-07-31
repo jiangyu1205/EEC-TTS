@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <title>主观音频评估任务</title>
+  <title>Subjective Audio Evaluation Task</title>
   <style>
     body {
       font-family: sans-serif;
@@ -62,119 +62,119 @@
 
 <body>
 
-  <!-- ✅ 封面页 -->
+  <!-- ✅ Cover Page -->
   <div id="cover-page">
-    <h1>主观音频评估任务</h1>
-    <p>请选择任务：</p>
-    <button id="startAB">A-B 音频对比任务</button>
-    <button id="startEmotion">情感分类任务</button>
-    <button id="startAge">年龄分类任务</button>
-
+    <h1>Subjective Audio Evaluation Task</h1>
+    <p>Please choose a task:</p>
+    <button id="startAB">A-B Audio Comparison</button>
+    <button id="startEmotion">Emotion Classification</button>
+    <button id="startAge">Age Prediction</button>
   </div>
 
-  <!-- ✅ AB对比任务 -->
+  <!-- ✅ AB Comparison Task -->
   <div id="questionnaire">
     <h2 id="question-counter"></h2>
 
     <div class="audio-triple">
       <div class="audio-block">
-        <h3>A 音频</h3>
+        <h3>Audio A</h3>
         <audio id="audioA" controls></audio>
       </div>
       <div class="audio-block">
-        <h3>B 音频</h3>
+        <h3>Audio B</h3>
         <audio id="audioB" controls></audio>
       </div>
       <div class="audio-block">
-        <h3>C 音频（参考）</h3>
+        <h3>Reference Audio C</h3>
         <audio id="audioC" controls></audio>
       </div>
     </div>
 
     <form id="rating-form">
       <div class="choice">
-        <p><strong>哪个音频（A或B）的音色更像 C？</strong></p>
+        <p><strong>Which audio (A or B) has a timbre more similar to C?</strong></p>
         <label><input type="radio" name="emotion_similarity" value="A" required> A</label>
         <label><input type="radio" name="emotion_similarity" value="B" required> B</label>
-        <label><input type="radio" name="emotion_similarity" value="equal" required> 没有差别</label>
+        <label><input type="radio" name="emotion_similarity" value="equal" required> No difference</label>
       </div>
 
       <div class="choice">
-        <p><strong>哪个音频（A或B）的音质更好？</strong></p>
+        <p><strong>Which audio (A or B) has better quality?</strong></p>
         <label><input type="radio" name="audio_quality" value="A" required> A</label>
         <label><input type="radio" name="audio_quality" value="B" required> B</label>
-        <label><input type="radio" name="audio_quality" value="equal" required> 没有差别</label>
+        <label><input type="radio" name="audio_quality" value="equal" required> No difference</label>
       </div>
 
-      <button type="submit">下一题</button>
+      <button type="submit">Next</button>
     </form>
 
     <div id="complete">
-      <p>任务完成！点击下载结果：</p>
-      <button onclick="downloadCSV()">下载 AB任务 CSV</button>
+      <p>Task completed! Download your results:</p>
+      <button onclick="downloadCSV()">Download AB Task CSV</button>
+      <button onclick="downloadABAnswer()">Download AB Task Answer</button> <!-- 新增 -->
     </div>
   </div>
 
-  <!-- ✅ 情感分类任务 -->
+  <!-- ✅ Emotion Classification Task -->
   <div id="emotion-task">
     <h2 id="emotion-counter"></h2>
 
     <div class="audio-single">
       <div class="audio-block">
-        <h3>请听音频并选择其情感</h3>
+        <h3>Please listen and choose the emotion</h3>
         <audio id="emotionAudio" controls></audio>
       </div>
     </div>
 
     <form id="emotion-form">
       <div class="choice">
-        <p><strong>该音频表达的情感是？</strong></p>
-        <label><input type="radio" name="emotion_label" value="ANGRY" required>ANGRY愤怒</label>
-        <label><input type="radio" name="emotion_label" value="HAPPY" required>HAPPY开心</label>
-        <label><input type="radio" name="emotion_label" value="SAD" required>SAD难过</label>
-        <label><input type="radio" name="emotion_label" value="SURPRISED" required>SURPRISED惊讶</label>
-        <label><input type="radio" name="emotion_label" value="NEUTRAL" required>NEUTRAL平淡</label>
+        <p><strong>What is the emotion expressed in this audio?</strong></p>
+        <label><input type="radio" name="emotion_label" value="ANGRY" required> ANGRY</label>
+        <label><input type="radio" name="emotion_label" value="HAPPY" required> HAPPY</label>
+        <label><input type="radio" name="emotion_label" value="SAD" required> SAD</label>
+        <label><input type="radio" name="emotion_label" value="SURPRISED" required> SURPRISED</label>
+        <label><input type="radio" name="emotion_label" value="NEUTRAL" required> NEUTRAL</label>
       </div>
 
-      <button type="submit">下一题</button>
+      <button type="submit">Next</button>
     </form>
 
     <div id="complete-emotion">
-      <p>情感分类完成！点击下载结果：</p>
-      <button onclick="downloadEmotionCSV()">下载 情感任务 CSV</button>
+      <p>Emotion task completed! Download your results:</p>
+      <button onclick="downloadEmotionCSV()">Download Emotion Task CSV</button>
+      <p>Download ground-truth and SenseVoice label and our label</p>
+      <button onclick="downloadEmotionAnswer()">Download Emotion Task Answer</button>
     </div>
   </div>
 
-  <!-- 年龄分类任务 -->
-  <!-- 年龄分类任务 -->
+  <!-- ✅ Age Prediction Task -->
   <div id="age-task">
     <h2 id="age-counter"></h2>
     <div class="audio-single">
       <div class="audio-block">
-        <h3>请结合音频与图像判断年龄</h3>
+        <h3>Listen to the audio and view the image to estimate the age</h3>
         <audio id="ageAudio" controls></audio>
         <br />
-        <img id="ageImage" src="" alt="年龄提示图"
+        <img id="ageImage" src="" alt="Age hint image"
           style="margin-top: 1em; max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px;" />
       </div>
     </div>
 
     <form id="age-form">
       <div class="choice">
-        <p><strong>请输入你预测的年龄（只能是数字）：</strong></p>
+        <p><strong>Enter your predicted age (numbers only):</strong></p>
         <input type="text" id="age_input" name="age_label" required pattern="^\d+$" 
-               placeholder="例如：35" title="请输入整数年龄，例如 28" />
+               placeholder="e.g., 34" title="Please enter an integer age, e.g., 28" />
       </div>
-      
 
-
-
-      <button type="submit">下一题</button>
+      <button type="submit">Next</button>
     </form>
 
     <div id="complete-age">
-      <p>年龄分类完成！点击下载结果：</p>
-      <button onclick="downloadAgeCSV()">下载 年龄任务 CSV</button>
+      <p>Age prediction task completed! Download your results:</p>
+      <button onclick="downloadAgeCSV()">Download Age Task CSV</button>
+      <p>Download ground-truth and Qwen2Audio label and our label</p>
+      <button onclick="downloadAgeAnswer()">Download</button> 
     </div>
   </div>
 

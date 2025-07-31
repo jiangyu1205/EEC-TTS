@@ -1,0 +1,11 @@
+Audio_A Audio_B Audio_C
+gt_audio/speaker1_gen_ref.wav gt_audio/speaker1_gen_raw.wav gt_audio/speaker1_gt.wav
+gt_audio/speaker2_gen_raw.wav gt_audio/speaker2_gen_ref.wav gt_audio/speaker2_gt.wav
+gt_audio/speaker3_gen_ref.wav gt_audio/speaker3_gen_raw.wav gt_audio/speaker3_gt.wav
+gt_audio/speaker4_gen_ref.wav gt_audio/speaker4_gen_raw.wav gt_audio/speaker4_gt.wav
+gt_audio/speaker5_gen_raw.wav gt_audio/speaker5_gen_ref.wav gt_audio/speaker5_gt.wav
+gt_audio/speaker6_gen_raw.wav gt_audio/speaker6_gen_ref.wav gt_audio/speaker6_gt.wav
+gt_audio/speaker7_gen_ref.wav gt_audio/speaker7_gen_raw.wav gt_audio/speaker7_gt.wav
+gt_audio/speaker8_gen_raw.wav gt_audio/speaker8_gen_ref.wav gt_audio/speaker8_gt.wav
+gt_audio/speaker9_gen_ref.wav gt_audio/speaker9_gen_raw.wav gt_audio/speaker9_gt.wav
+gt_audio/speaker10_gen_ref.wav gt_audio/speaker10_gen_raw.wav gt_audio/speaker10_gt.wav

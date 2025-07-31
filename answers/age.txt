@@ -1,0 +1,11 @@
+wav_path image_path gt_label qwen2audio_label M3PDB_label
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00017/AXAl9BX9-sQ/00025.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000017/0176_01.jpg" 29岁 29岁 31岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00061/GtTmoAoWxMc/00057.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000061/0043_01.jpg" 40岁 20岁 27岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00812/Eao8kNmT0sY/00093.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000812/0652_01.jpg" 30岁 40岁 32岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00419/EJdpFuMdbj0/00120.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000419/0574_01.jpg" 41岁 20岁 32岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00866/2KYsNinMZ9U/00044.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000866/0332_01.jpg" 34岁 20岁 33岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00562/2nC975mY-Z4/00029.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000562/0096_01.jpg" 33岁 30岁 24岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id00817/UOTRcRmKHPQ/00268.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n000817/0202_01.jpg" 35岁 20岁 33岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id01066/kqP_NZ1FRlM/00186.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n001066/0178_01.jpg" 53岁 40岁 45岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id01224/_F-Yu38QTpg/00208.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n001224/0175_01.jpg" 31岁 30岁 28岁
+"wav": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_speech/aac/id01298/wGQIqoQNXxA/00445.wav" "image": "/gemini/platform/public/aigc/gongcheng/zby/voxceleb_image/data/train/n001298/0129_01.jpg" 39岁 20岁 38岁
